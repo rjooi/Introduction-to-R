@@ -1,0 +1,42 @@
+gene_expression.tsv
+#Making the gene accession numbers the row names
+x<-read.table("gene_expression.tsv",header=T,row.names=1)
+
+#Make a new column which is mean of the other columns
+x$Mean<-rowMeans(x)
+
+#List the 10 genes with the highest mean expression
+x<-x[order(-x$Mean),]
+x[1:10,]
+
+#Determine the number of genes with an average <10
+nrow(subset(x, Mean<10))
+
+#Make a pairs plot of the data
+pairs(x)
+
+growth_data.scv
+#code to import this csv file into an R object
+download.file("https://raw.githubusercontent.com/markziemann/SLE712_files/master/week10_files/growth_data.csv",destfile = "growth_data.csv")
+y<-read.csv("growth_data")
+
+#Calculate the average and standard deviation of tree circumference at the start and end of the study at both site
+k<-y[1:50,]
+mean(k$Circumf_1999_cm)
+sd(k$Circumf_1999_cm)
+mean(k$Circumf_2019_cm)
+sd(k$Circumf_2019_cm)
+l<-y[51:100,]
+mean(l$Circumf_1999_cm)
+sd(l$Circumf_1999_cm)
+mean(l$Circumf_2019_cm)
+sd(l$Circumf_2019_cm)
+
+#Make a box plot of tree circumference at the start and end of the study at both sites
+colnames(k) [3]<-"1999"
+colnames(k) [6]<-"2019"
+colnames(l) [3]<-"1999"
+colnames(l) [6]<-"2019"
+par(mfrow=c(1,2))
+boxplot(k[,c(3,6)], main="Boxplot of northwest side", ylab="Circumference(cm)")
+boxplot(l[,c(3,6)], main="Boxplot of southwest side", ylab="Circumference(cm)")
