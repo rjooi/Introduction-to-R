@@ -1,5 +1,6 @@
 gene_expression.tsv
-#Making the gene accession numbers the row names
+#Read in the file and make the gene accession numbers the row names
+download.file("https://raw.githubusercontent.com/markziemann/SLE712_files/master/week10_files/gene_expression.tsv",destfile = "gene_expression.tsv")
 x<-read.table("gene_expression.tsv",header=T,row.names=1)
 
 #Make a new column which is mean of the other columns
